@@ -77,17 +77,19 @@ public class JwtController {
 	}
 
 	@ApiOperation(value = "인증된 회원 처리", notes = "토큰 시간을 갱신하고, 회원정보와 토큰을 담는다.", response = Map.class)
-	@GetMapping("/update/{userId}")
-	public ResponseEntity<Map<String, Object>> getInfo(
-			@PathVariable("userId") @ApiParam(value = "업데이트할 회원 아이디", required = true) String userId) throws Exception {
+	@GetMapping("/check")
+	public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) throws Exception {
 
 		logger.info("토큰 갱신 - 호출");
 
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		String accessToken = jwtService.createAccessToken("userId", userId);// key, data
-		String refreshToken = jwtService.createRefreshToken("userId", userId);// key, data
+		String accessToken = request.getHeader("access-token");
+		String refreshToken = request.getHeader("refresh-token");
+
+		String userId = jwtService.getUserId(accessToken);
+		
 		jwtService.saveRefreshToken(userId, refreshToken);
 
 		logger.debug("로그인 accessToken 정보 : {}", accessToken);
@@ -110,7 +112,7 @@ public class JwtController {
 
 		logger.info("로그아웃 - 호출");
 
-		if(jwtService.deleRefreshToken(userId))
+		if (jwtService.deleRefreshToken(userId))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 
 		return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -21,7 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private JwtService jwtService;
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -29,28 +29,41 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String refreshToken = request.getHeader(HEADER_REFRESH);
 
 		System.out.println("!111111111111!!!!");
-		
+
 		logger.debug("accessToken: {}", accessToken);
 		logger.debug("refreshToken: {}", refreshToken);
 
-		if (accessToken != null && jwtService.checkToken(accessToken)) {
-			logger.info("access 토큰 사용 가능 : {}", accessToken);
-			return true;
+		if (accessToken != null) {
+			String userId = jwtService.getUserId(accessToken);
+			if (userId == null || userId == "")
+				return false;
 
-		} else if (refreshToken != null) {
-			String userId = jwtService.getUserId(refreshToken);
-			if(userId == null || userId == "") return false;
-			
-			logger.info("refresh 토큰 사용 가능 : {}", refreshToken);
-			
+			logger.info("access 토큰 사용 가능 : {}", refreshToken);
+
 			accessToken = jwtService.createAccessToken("userId", userId);
 			refreshToken = jwtService.createRefreshToken("userId", userId);
-			
+
 			jwtService.saveRefreshToken(userId, refreshToken);
-			
+
 			response.setHeader("access-token", accessToken);
 			response.setHeader("refresh-token", refreshToken);
-			
+
+			return true;
+		} else if (refreshToken != null) {
+			String userId = jwtService.getUserId(refreshToken);
+			if (userId == null || userId == "")
+				return false;
+
+			logger.info("refresh 토큰 사용 가능 : {}", refreshToken);
+
+			accessToken = jwtService.createAccessToken("userId", userId);
+			refreshToken = jwtService.createRefreshToken("userId", userId);
+
+			jwtService.saveRefreshToken(userId, refreshToken);
+
+			response.setHeader("access-token", accessToken);
+			response.setHeader("refresh-token", refreshToken);
+
 			return true;
 		}
 
