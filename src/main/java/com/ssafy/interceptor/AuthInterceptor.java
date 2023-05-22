@@ -28,6 +28,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String accessToken = request.getHeader(HEADER_ACCESS);
 		String refreshToken = request.getHeader(HEADER_REFRESH);
 
+		System.out.println("!111111111111!!!!");
+		
 		logger.debug("accessToken: {}", accessToken);
 		logger.debug("refreshToken: {}", refreshToken);
 

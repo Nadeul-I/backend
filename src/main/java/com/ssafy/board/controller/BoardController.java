@@ -44,7 +44,7 @@ public class BoardController {
 	}
 
 	@ApiOperation(value = "게시판 목록", notes = "조건에 맞는 게시글들을 불러온다.", response = Map.class)
-	@GetMapping
+	@GetMapping("/list")
 	public ResponseEntity<?> boardList(@ApiParam(value = "게시글 검색 조건", required = true) BoardSearchDto boardSearchDto)
 			throws Exception {
 		logger.info("boardList - 호출");
@@ -62,7 +62,7 @@ public class BoardController {
 	}
 
 	@ApiOperation(value = "게시글 상세보기", notes = "게시글 번호를 통해 게시글을 불러온다.", response = BoardDto.class)
-	@GetMapping("/{boardNo}")
+	@GetMapping("/view/{boardNo}")
 	public ResponseEntity<?> boardView(
 			@PathVariable("boardNo") @ApiParam(value = "게시글 번호", required = true) int boardNo) throws Exception {
 		logger.info("boardView - 호출");
@@ -75,7 +75,7 @@ public class BoardController {
 
 	// 게시글 비어있는 여부 생각해볼필요가 있음
 	@ApiOperation(value = "게시글 쓰기", notes = "입력을 바탕으로 게시글을 작성한다", response = String.class)
-	@PostMapping
+	@PostMapping("/write")
 	public ResponseEntity<?> boardWrite(@RequestBody @ApiParam(value = "게시글 입력", required = true) BoardDto boardDto)
 			throws Exception {
 		logger.info("boardWrite - 호출");
@@ -94,7 +94,7 @@ public class BoardController {
 	// redirectAttributes.addAttribute("word", "");
 
 	@ApiOperation(value = "게시글 삭제", notes = "현재 게시글을 삭제한다.", response = String.class)
-	@DeleteMapping("/{boardNo}")
+	@DeleteMapping("/delete/{boardNo}")
 	public ResponseEntity<?> boardDelete(
 			@PathVariable("boardNo") @ApiParam(value = "게시글 번호", required = true) int boardNo) throws Exception {
 		logger.info("boardDelete - 호출");
@@ -107,7 +107,7 @@ public class BoardController {
 	}
 
 	@ApiOperation(value = "게시글 수정", notes = "현재 게시글을 수정한다.", response = String.class)
-	@PutMapping
+	@PutMapping("/modify")
 	public ResponseEntity<?> boardModify(
 			@RequestBody @ApiParam(value = "수정할 게시글 정보", required = true) BoardDto boardDto) throws Exception {
 		logger.info("boardModify - 호출 {}");

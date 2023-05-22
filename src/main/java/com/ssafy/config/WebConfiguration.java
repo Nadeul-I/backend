@@ -1,5 +1,8 @@
 package com.ssafy.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,6 +17,9 @@ import com.ssafy.interceptor.AuthInterceptor;
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
 
+	private final List<String> patterns = Arrays.asList("/board/**");
+	private final List<String> exPatterns = Arrays.asList("/auth/signin");
+	
 	private AuthInterceptor authInterceptor;
 	
 	public WebConfiguration(AuthInterceptor authInterceptor) {
@@ -40,9 +46,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(authInterceptor)
-				.addPathPatterns("/board/")
-				.excludePathPatterns("/auth/signin");
+//		registry.addInterceptor(authInterceptor)
+//				.addPathPatterns(patterns)
+//				.excludePathPatterns(exPatterns);
 	}
 
 	// Swagger UI 실행시 404처리

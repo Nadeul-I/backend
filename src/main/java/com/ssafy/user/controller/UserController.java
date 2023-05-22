@@ -85,7 +85,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "회원가입", notes = "양식을 받아 회원가입을 한다. ", response = String.class)
-	@PostMapping
+	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody @ApiParam(value = "회원가입 양식", required = true) UserDto userDto) {
 
 		logger.info("회원가아아아입 - 호출");
@@ -99,7 +99,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "회원탈퇴", notes = "유저 아이디 기반으로 회원 탈퇴를 진행한다.", response = String.class)
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/withdraw/{userId}")
 	public ResponseEntity<?> withdraw(
 			@PathVariable("userId") @ApiParam(value = "유저 아이디", required = true) String userId) {
 
