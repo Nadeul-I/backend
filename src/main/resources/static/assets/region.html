@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../assets/css/region.css">
+</head>
+<body>
+	<div class="center">
+        <h1>지역별 여행지 검색</h1>
+        <form method="GET" action="search">
+        <div class="region">
+            <select id="sido">
+                <option value="0" selected>시도 선택</option>
+                <option value="1">서울</option>
+                <option value="2">인천</option>
+                <option value="3">대전</option>
+                <option value="4">대구</option>
+                <option value="5">광주</option>
+                <option value="6">부산</option>
+                <option value="7">울산</option>
+                <option value="8">세종</option>
+                <option value="31">경기도</option>
+                <option value="32">강원도</option>
+            </select>
+            <select id="gugun">
+                <option value="0">시군구 선택</option>
+            </select>
+            <select id="category">
+                <option value="0" selected>카테고리 선택</option>
+                <option value="12">관광지</option>
+                <option value="14">문화시설</option>
+                <option value="15">축제공연행사</option>
+                <option value="25">여행코스</option>
+                <option value="28">레포츠</option>
+                <option value="32">숙박</option>
+                <option value="38">쇼핑</option>
+                <option value="39">음식점</option>
+            </select>
+            <input type="text" id="keyword" placeholder="키워드 입력"/>
+            <input type="button" id="searchBtn" value="검색"/>     
+        </div>
+        </form>
+    </div>
+    <div class="center" id="map" style="width:1000px;height:550px; top:60%"></div>
+</body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ae06e1c329b4fe685636eddc4ce2a3d"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption); 
+    
+    let root = "/region";
+    
+    
+    document.getElementById("sido").addEventListener("change",function(){
+    	let sido = document.getElementById("sido");
+    	let value = sido.options[sido.selectedIndex].value;
+    	/* let config = {
+    		method:"GET",
+    		headers:{
+    			"Content-Type": "application/json",
+    		},
+    		body: JSON.stringify(value),
+    	}; */
+    	fetch(`${root}/search/${value}`)
+    	.then((response) => response.json())
+    	.then((data) => makeGungu(data))
+    })
+    function makeGungu(data){
+    	let gungu = document.getElementById("gugun");
+    	while(gungu.firstChild){
+    		gungu.firstChild.remove()
+    	}
+    	data.forEach(function(item){
+    		let option = document.createElement("option")
+    		option.setAttribute("value", item.gugunCode)
+    		option.setAttribute("gugunName", item.gugunName)
+    		option.innerText=item.gugunName;
+    		gungu.appendChild(option);
+    	})
+    }
+    document.getElementById("searchBtn").addEventListener("click",function(){
+    	// todo : 반복되는 코드 수정할 것.
+    	let sido = document.getElementById("sido");
+    	let sidoSelect = sido.options[sido.selectedIndex].value;
+    	let gugun = document.getElementById("gugun");
+    	let gugunSelect = gugun.options[gugun.selectedIndex].value;
+    	let cat = document.getElementById("category");
+    	let catSelect = cat.options[cat.selectedIndex].value;
+    	let keyword = document.getElementById("keyword").value=== '' ? 0 : document.getElementById("keyword").value ;
+    	console.log(sidoSelect)
+    	console.log(gugunSelect)
+    	console.log(catSelect)
+    	console.log(sidoSelect==='')
+    	console.log(keyword==='')
+    	console.log(keyword)
+    	fetch(`${root}/search/${sidoSelect}/${gugunSelect}/${catSelect}/${keyword}/`)
+    	.then((response)=>response.json())
+    	.then((data)=> makeMarker(data))
+    })
+    function makeMarker(data){
+    	console.log("data size " + data)
+    	console.log(data.length)
+    	if(data.length==0){
+    		alert("여행지 정보가 없습니다.")
+    		return;
+    	}
+    	data.forEach(function(item){
+    		console.log(item.latitude)
+    		let markerPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
+    		let markers = new kakao.maps.Marker({
+        		position: markerPosition
+        	});
+        	markers.setMap(map);
+        	map.setCenter(new kakao.maps.LatLng(item.latitude, item.longitude))
+    	})
+    	
+    }
+    </script>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.ssafy.region.model.mapper.RegionMapper">
+
+    <resultMap type="SidoDto" id="sido">
+        <result column="sido_code" property="sidoCode"/>
+        <result column="sido_name" property="sidoName"/>
+    </resultMap>
+    <resultMap type="GugunDto" id="gugun">
+        <result column="sido_code" property="sidoCode"/>
+        <result column="gugun_code" property="gugunCode"/>
+        <result column="gugun_name" property="gugunName"/>
+    </resultMap>
+    <resultMap type="RegionDto" id="region">
+        <result column="sido_code" property="sidoCode"/>
+        <result column="gugun_code" property="gugunCode"/>
+        <result column="content_type_id" property="contentTypeId"/>
+        <result column="title" property="title"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="first_image" property="firstImage"/>
+        <result column="content_id" property="contentId"/>
+        <result column="zipcode" property="zipcode"/>
+    </resultMap>
+    <select id="getSidoList" resultMap="sido">
+        select *
+        from sido
+    </select>
+    <select id="getGugunList" parameterType="int" resultMap="gugun">
+        select *
+        from gugun
+        where sido_code=#{sido}
+    </select>
+     <select id="searchList" parameterType="searchDto" resultMap="region">
+        select *
+        from attraction_info
+        <trim prefix="where" suffixOverrides="and ">
+            <if test="sido != 0"> sido_code = #{sido} and</if>
+            <if test="gugun != 0"> gugun_code = #{gugun} and</if>
+            <if test="cat != 0"> content_type_id = #{cat} and</if>
+            <if test='keyword != "0"'> title like CONCAT('%', #{keyword}, '%') and</if>
+        </trim>
+        limit 100;
+    </select>
+    <select id="getHotPlaceList" resultMap="region">
+        select *
+        from attraction_info
+        order by readcount desc
+        limit 20;
+    </select>
+</mapper>

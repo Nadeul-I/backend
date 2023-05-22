@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
+
+	<resultMap type="boardDto" id="board">
+		<result column="boardNo" property="boardNo" />
+		<result column="boardTitle" property="boardTitle" />
+		<result column="boardContent" property="boardContent" />
+		<result column="boardHit" property="boardHit" />
+		<result column="boardDate" property="boardDate" />
+		<result column="boardId" property="boardId" />
+	</resultMap>
+
+	<insert id="writeBoard" parameterType="boardDto">
+		insert into board (boardTitle, boardContent, boardId)
+		values
+		(#{boardTitle}, #{boardContent}, #{boardId})
+		<selectKey resultType="int" keyProperty="boardNo"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="search != 'boardTitle' and search != 'boardId'">
+				and boardContent like concat('%', #{word}, '%')
+			</if>
+			<if test="search == 'boardTitle' or search == 'boardId'">
+				and ${search} = #{word}
+			</if>
+		</if>
+	</sql>
+
+	<select id="listBoard" parameterType="boardSearchDto" resultMap="board">
+		select boardNo, boardTitle, boardContent, boardHit, date_format(boardDate,'%Y-%m-%d') as boardDate, boardId from board
+		<where>
+			<include refid="search"></include>
+		</where>
+		limit #{start}, #{listSize}
+	</select>
+
+	<select id="getTotalBoardCount" parameterType="boardSearchDto"
+		resultType="int">
+		select count('boardNo')
+		from board
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+
+	<select id="getBoard" parameterType="int" resultMap="board">
+		select *
+		from board
+		where boardNo = #{boardNo}
+	</select>
+
+	<update id="updateHit" parameterType="int">
+		update board
+		set boardHit =
+		boardHit + 1
+		where boardNo = #{boardNo}
+	</update>
+
+	<update id="modifyBoard" parameterType="boardDto">
+		update board
+		set boardTitle = #{boardTitle}, boardContent = #{boardContent}
+		where boardNo = #{boardNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from board
+		where boardNo = #{boardNo}
+	</delete>
+
+</mapper>

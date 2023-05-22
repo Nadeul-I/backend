@@ -1,0 +1,38 @@
+.board-view-container{
+    width: 1200px;
+    margin: auto;
+}
+
+.board-view-header{
+    margin:auto;
+    border-bottom: 3px solid #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.board-view-list-btn{
+    height: 50px;
+}
+
+.board-view-title{
+    border-bottom: 1px solid #adadad;
+}
+
+.board-view-title h2{
+    margin-bottom: 10px;
+}
+
+.board-view-title div{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.board-view-content{
+    margin: 1rem;
+}
+
+.board-view-condition-container{
+    text-align: center;
+    margin: 4rem 0;
+}
