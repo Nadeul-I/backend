@@ -37,3 +37,5 @@ build/
 .vscode/
 /.metadata/
 log/log.log
+bin
+.log
