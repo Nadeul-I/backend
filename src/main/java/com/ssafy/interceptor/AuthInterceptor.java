@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import com.ssafy.jwt.model.service.JwtService;
 
 @Component
@@ -28,6 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String accessToken = request.getHeader(HEADER_ACCESS);
 		String refreshToken = request.getHeader(HEADER_REFRESH);
 
+
 		System.out.println("!111111111111!!!!");
 
 		logger.debug("accessToken: {}", accessToken);
@@ -45,8 +45,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 			jwtService.saveRefreshToken(userId, refreshToken);
 
+//			request.setAttribute("access-token", accessToken);
+//			request.setAttribute("refresh-token", refreshToken);
+			
 			response.setHeader("access-token", accessToken);
-			response.setHeader("refresh-token", refreshToken);
+			response.setHeader("refresh-token", accessToken);
 
 			return true;
 		} else if (refreshToken != null) {
@@ -61,8 +64,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 			jwtService.saveRefreshToken(userId, refreshToken);
 
+//			request.setAttribute("access-token", accessToken);
+//			request.setAttribute("refresh-token", refreshToken);
+			
 			response.setHeader("access-token", accessToken);
-			response.setHeader("refresh-token", refreshToken);
+			response.setHeader("refresh-token", accessToken);
 
 			return true;
 		}

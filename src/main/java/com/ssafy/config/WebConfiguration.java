@@ -17,8 +17,8 @@ import com.ssafy.interceptor.AuthInterceptor;
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
 
-	private final List<String> patterns = Arrays.asList("/board/**");
-	private final List<String> exPatterns = Arrays.asList("/auth/signin");
+	private final List<String> patterns = Arrays.asList("/auth/check");
+	private final List<String> exPatterns = Arrays.asList("/board/**");
 	
 	private AuthInterceptor authInterceptor;
 	
@@ -29,26 +29,22 @@ public class WebConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-//		System.out.println("CORS Setting");
-//		default 설정.
-//		Allow all origins.
-//		Allow "simple" methods GET, HEAD and POST.
-//		Allow all headers.
-//		Set max age to 1800 seconds (30 minutes).
-		registry.addMapping("/**").allowedOrigins("*")
-//		.allowedOrigins("http://localhost:8080", "http://localhost:8081")
+
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+//				.allowedHeaders("*")
 				.allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(),
 						HttpMethod.DELETE.name(), HttpMethod.HEAD.name(), HttpMethod.OPTIONS.name(),
 						HttpMethod.PATCH.name())
-//			.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD")
+//				.exposedHeaders("Authorization")
 				.maxAge(1800);
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(authInterceptor)
-//				.addPathPatterns(patterns)
-//				.excludePathPatterns(exPatterns);
+		registry.addInterceptor(authInterceptor)
+				.addPathPatterns(patterns)
+				.excludePathPatterns(exPatterns);
 	}
 
 	// Swagger UI 실행시 404처리

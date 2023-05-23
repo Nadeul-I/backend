@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,15 +79,18 @@ public class JwtController {
 
 	@ApiOperation(value = "인증된 회원 처리", notes = "토큰 시간을 갱신하고, 회원정보와 토큰을 담는다.", response = Map.class)
 	@GetMapping("/check")
-	public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) throws Exception {
-
+	public ResponseEntity<Map<String, Object>> getInfo(HttpServletResponse response) throws Exception {
+		
 		logger.info("토큰 갱신 - 호출");
 
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		String accessToken = request.getHeader("access-token");
-		String refreshToken = request.getHeader("refresh-token");
+		String accessToken = response.getHeader("access-token");
+		String refreshToken = response.getHeader("refresh-token");
+		
+		logger.debug("로그인 accessToken 정보 : {}", accessToken);
+		logger.debug("로그인 refreshToken 정보 : {}", refreshToken);
 
 		String userId = jwtService.getUserId(accessToken);
 		
