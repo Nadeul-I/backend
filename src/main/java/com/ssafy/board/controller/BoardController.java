@@ -44,15 +44,16 @@ public class BoardController {
 	}
 
 	@ApiOperation(value = "게시판 목록", notes = "조건에 맞는 게시글들을 불러온다.", response = Map.class)
-	@GetMapping("/list")
-	public ResponseEntity<?> boardList(@ApiParam(value = "게시글 검색 조건", required = true) BoardSearchDto boardSearchDto)
+	@PostMapping("/list")
+	public ResponseEntity<?> boardList(@RequestBody @ApiParam(value = "게시글 검색 조건", required = true) BoardSearchDto boardSearchDto)
 			throws Exception {
 		logger.info("boardList - 호출");
+		logger.info("boardSearchDto 확인 : {}", boardSearchDto.getPgno());
 
 		Map<String, Object> map = new HashMap<>();
 
-		List<BoardDto> list = boardService.listBoard(boardSearchDto);
 		PageNavigation pageNavigation = boardService.makePageNavigation(boardSearchDto);
+		List<BoardDto> list = boardService.listBoard(boardSearchDto);
 
 		map.put("boards", list);
 		map.put("navigation", pageNavigation);

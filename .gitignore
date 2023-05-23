@@ -38,4 +38,5 @@ build/
 /.metadata/
 log/log.log
 bin
-.log
+**.log
+
