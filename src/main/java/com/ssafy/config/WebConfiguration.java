@@ -17,7 +17,7 @@ import com.ssafy.interceptor.AuthInterceptor;
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
 
-	private final List<String> patterns = Arrays.asList("/board/**");
+	private final List<String> patterns = Arrays.asList("/auth/check");
 	private final List<String> exPatterns = Arrays.asList("/auth/signin");
 	
 	private AuthInterceptor authInterceptor;
@@ -46,9 +46,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(authInterceptor)
-//				.addPathPatterns(patterns)
-//				.excludePathPatterns(exPatterns);
+		registry.addInterceptor(authInterceptor)
+				.addPathPatterns(patterns)
+				.excludePathPatterns(exPatterns);
 	}
 
 	// Swagger UI 실행시 404처리

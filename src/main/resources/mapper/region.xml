@@ -23,6 +23,7 @@
         <result column="first_image" property="firstImage"/>
         <result column="content_id" property="contentId"/>
         <result column="zipcode" property="zipcode"/>
+        <result column="readcount" property="readCount"/>
     </resultMap>
     <select id="getSidoList" resultMap="sido">
         select *
