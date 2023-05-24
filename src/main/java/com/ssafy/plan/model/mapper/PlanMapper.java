@@ -11,7 +11,7 @@ import com.ssafy.plan.model.PlanDto;
 public interface PlanMapper {
 	int writePlan(PlanDto planDto) throws SQLException;
 
-	List<PlanDto> listPlan(String userId) throws SQLException;
+	List<PlanDto> listPlan(String userId, int pgno) throws SQLException;
 	
 	int getTotalPlanCount(String userId) throws SQLException;
 	

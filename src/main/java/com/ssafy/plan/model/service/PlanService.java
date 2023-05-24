@@ -8,9 +8,9 @@ import com.ssafy.util.PageNavigation;
 public interface PlanService {
 	int writePlan(PlanDto planDto) throws Exception;
 
-	List<PlanDto> listPlan(String userId) throws Exception;
+	List<PlanDto> listPlan(String userId, int pgno) throws Exception;
 
-	PageNavigation makePageNavigation(String userId) throws Exception;
+	PageNavigation makePageNavigation(String userId, int pgno) throws Exception;
 
 	PlanDto getPlan(int planNo) throws Exception;
 
