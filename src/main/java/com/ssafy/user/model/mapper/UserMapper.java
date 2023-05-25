@@ -15,7 +15,7 @@ public interface UserMapper {
 
 	UserDto view(String userId);
 
-	boolean withdraw(String userId);
+	boolean withdraw(UserDto userDto);
 
 	boolean modify(UserDto userDto);
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -99,25 +100,47 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "회원탈퇴", notes = "유저 아이디 기반으로 회원 탈퇴를 진행한다.", response = String.class)
-	@DeleteMapping("/withdraw/{userId}")
+	@DeleteMapping("/withdraw")
 	public ResponseEntity<?> withdraw(
-			@PathVariable("userId") @ApiParam(value = "유저 아이디", required = true) String userId) {
+			@RequestBody @ApiParam(value = "유저 아이디") UserDto userDto) {
 
-		logger.debug("회원 탈퇴 호출!! : {}", userId);
-
-		if (userService.withdraw(userId)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		System.out.println(userDto.getUserId());
+		logger.debug("회원 탈퇴 호출!! : {}", userDto.getUserId());
+		if(userService.signIn(userDto)==null) {
+			resultMap.put("message", FAIL);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		}
+		if (userService.withdraw(userDto)) {
+			System.out.println("들어옴?");
+			resultMap.put("message", SUCCESS);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+	
+	
+	@ApiOperation(value = "마이페이지", notes = "마이 페이지 정보를 출력한다.", response = String.class)
+	@GetMapping("/mypage/{userId}")
+	public ResponseEntity<Map<String, Object>> myPage(@PathVariable("userId") @ApiParam(value = "회원정보", required = true) String userId) {
 
+		logger.debug("사용자 id 호출!! : {}", userId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("userInfo", userService.userInfo(userId));
+		
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
+	}
+	
 	@ApiOperation(value = "회원수정", notes = "회원정보를 수정한다.", response = String.class)
-	@PutMapping
+	@PutMapping("modify")
 	public ResponseEntity<String> modify(@RequestBody @ApiParam(value = "수정할 회원정보", required = true) UserDto userDto) {
-
+		
 		logger.debug("회원수정 호출!! : {}", userDto);
-
+		
+		System.out.println(userDto.getUserId());
+		System.out.println(userDto.getUserEmail());
 		if (userService.userModify(userDto)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}

@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean withdraw(String userId) {
-		return userMapper.withdraw(userId);
+	public boolean withdraw(UserDto userDto) {
+		return userMapper.withdraw(userDto);
 	}
 
 	@Override

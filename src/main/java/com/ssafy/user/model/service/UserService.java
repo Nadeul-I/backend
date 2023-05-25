@@ -14,7 +14,7 @@ public interface UserService {
 
 	boolean signUp(UserDto userDto);
 
-	boolean withdraw(String userId);
+	boolean withdraw(UserDto userDto);
 
 	boolean userModify(UserDto userDto);
 

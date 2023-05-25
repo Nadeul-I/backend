@@ -26,7 +26,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String accessToken = request.getHeader(HEADER_ACCESS);
 		String refreshToken = request.getHeader(HEADER_REFRESH);
-
+		
+		System.out.println(accessToken+"?");
 
 		System.out.println("!111111111111!!!!");
 

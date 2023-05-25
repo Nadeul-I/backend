@@ -49,7 +49,7 @@
 	<delete id="withdraw" parameterType="string">
 		delete
 		from user
-		where userId = #{userId}
+		where userId = #{userId} and userPwd = #{userPwd}
 	</delete>
 	<select id="findPw" parameterType="string" resultType="string">
 		select userPwd
