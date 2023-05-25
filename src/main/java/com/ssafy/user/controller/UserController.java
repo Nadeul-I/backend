@@ -100,7 +100,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "회원탈퇴", notes = "유저 아이디 기반으로 회원 탈퇴를 진행한다.", response = String.class)
-	@DeleteMapping("/withdraw")
+	@PostMapping("/withdraw")
 	public ResponseEntity<?> withdraw(
 			@RequestBody @ApiParam(value = "유저 아이디") UserDto userDto) {
 
@@ -111,13 +111,12 @@ public class UserController {
 			resultMap.put("message", FAIL);
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
-		if (userService.withdraw(userDto)) {
+		else {
+			userService.withdraw(userDto);
 			System.out.println("들어옴?");
 			resultMap.put("message", SUCCESS);
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
-		return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
 	
 	
