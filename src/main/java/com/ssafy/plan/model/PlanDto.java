@@ -10,12 +10,66 @@ public class PlanDto {
 	int listSize; // 리스트 크기
 	String planId; // 여행 계획 쓴이
 	String planImg; // 여행 계획 이미지
+	String planStartTitle;
+	double planStartLat;
+	double planStartLng;
 	int planStart; // 여행 계획 시작점
+	String planEndTitle;
+	double planEndLat;
+	double planEndLng;
 	int planEnd; // 여행 계획 끝점
 
 	public PlanDto() {
 		super();
-		listSize = NavigationSize.listSize;
+		listSize = NavigationSize.cardSize;
+	}
+
+	public String getPlanStartTitle() {
+		return planStartTitle;
+	}
+
+	public void setPlanStartTitle(String planStartTitle) {
+		this.planStartTitle = planStartTitle;
+	}
+
+	public double getPlanStartLat() {
+		return planStartLat;
+	}
+
+	public void setPlanStartLat(double planStartLat) {
+		this.planStartLat = planStartLat;
+	}
+
+	public double getPlanStartLng() {
+		return planStartLng;
+	}
+
+	public void setPlanStartLng(double planStartLng) {
+		this.planStartLng = planStartLng;
+	}
+
+	public String getPlanEndTitle() {
+		return planEndTitle;
+	}
+
+	public void setPlanEndTitle(String planEndTitle) {
+		this.planEndTitle = planEndTitle;
+	}
+
+	public double getPlanEndLat() {
+		return planEndLat;
+	}
+
+	public void setPlanEndLat(double planEndLat) {
+		this.planEndLat = planEndLat;
+	}
+
+	public double getPlanEndLng() {
+		return planEndLng;
+	}
+
+	public void setPlanEndLng(double planEndLng) {
+		this.planEndLng = planEndLng;
 	}
 
 	public int getPlanNo() {
@@ -90,5 +144,4 @@ public class PlanDto {
 		this.planEnd = planEnd;
 	}
 
-	
 }

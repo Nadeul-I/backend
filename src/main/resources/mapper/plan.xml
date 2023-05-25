@@ -5,9 +5,9 @@
 <mapper namespace="com.ssafy.plan.model.mapper.PlanMapper">
 
 	<insert id="writePlan" parameterType="planDto">
-		insert into plan (planTitle, planImg, planStart, planEnd, planId)
+		insert into plan (planTitle, planStartTitle, planStartLat, planStartLng, planStart, planEndTitle, planEndLat, planEndLng, planEnd, planImg, planId)
 		values
-		(#{planTitle}, #{planImg}, #{planStart}, #{planEnd}, #{planId})
+		(#{planTitle}, #{planStartTitle}, #{planStartLat}, #{planStartLng}, #{planStart}, #{planEndTitle}, #{planEndLat}, #{planEndLng}, #{planEnd}, #{planImg}, #{planId})
 		<selectKey resultType="int" keyProperty="planNo"
 			order="AFTER">
 			select last_insert_id()
@@ -36,7 +36,7 @@
 	
 	<update id="modifyPlan" parameterType="planDto">
 		update plan
-		set planTitle = #{planTitle}, planStart = #{planStart}, planEnd = #{planEnd}, planImg = #{planImg}
+		set planTitle = #{planTitle}, planStartTitle = #{planStartTitle}, planStartLat = #{planStartLat}, planStartLng = #{planStartLng}, planStart = #{planStart}, planEndTitle = #{planEndTitle}, planEndLat = #{planEndLat}, planEndLng = #{planEndLng}, planEnd = #{planEnd}, planImg = #{planImg}
 		where planNo = #{planNo}
 	</update>
 
