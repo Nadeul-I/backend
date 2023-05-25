@@ -111,12 +111,13 @@ public class UserController {
 			resultMap.put("message", FAIL);
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
-		else {
-			userService.withdraw(userDto);
+		if (userService.withdraw(userDto)) {
 			System.out.println("들어옴?");
 			resultMap.put("message", SUCCESS);
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
+		return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+
 	}
 	
 	
