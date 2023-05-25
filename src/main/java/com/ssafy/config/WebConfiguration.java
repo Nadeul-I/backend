@@ -17,8 +17,8 @@ import com.ssafy.interceptor.AuthInterceptor;
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
 
-	private final List<String> patterns = Arrays.asList("/auth/check", "/board/**");
-	private final List<String> exPatterns = Arrays.asList("/board/list", "/board/view/*");
+	private final List<String> patterns = Arrays.asList("/auth/check");
+	private final List<String> exPatterns = Arrays.asList();
 	
 	private AuthInterceptor authInterceptor;
 	

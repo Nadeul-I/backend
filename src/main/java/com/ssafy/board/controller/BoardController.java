@@ -89,11 +89,6 @@ public class BoardController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 
-	// 게시글 삭제후 검색 정보 초기화
-	// redirectAttributes.addAttribute("pgno", "1");
-	// redirectAttributes.addAttribute("search", "");
-	// redirectAttributes.addAttribute("word", "");
-
 	@ApiOperation(value = "게시글 삭제", notes = "현재 게시글을 삭제한다.", response = String.class)
 	@DeleteMapping("/delete/{boardNo}")
 	public ResponseEntity<?> boardDelete(

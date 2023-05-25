@@ -26,34 +26,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String accessToken = request.getHeader(HEADER_ACCESS);
 		String refreshToken = request.getHeader(HEADER_REFRESH);
-		
-		System.out.println(accessToken+"?");
+
 
 		System.out.println("!111111111111!!!!");
 
 		logger.debug("accessToken: {}", accessToken);
 		logger.debug("refreshToken: {}", refreshToken);
-
-		if (accessToken != null) {
-			String userId = jwtService.getUserId(accessToken);
-			if (userId == null || userId == "")
-				return false;
-
-			logger.info("access 토큰 사용 가능 : {}", refreshToken);
-
-			accessToken = jwtService.createAccessToken("userId", userId);
-			refreshToken = jwtService.createRefreshToken("userId", userId);
-
-			jwtService.saveRefreshToken(userId, refreshToken);
-
-//			request.setAttribute("access-token", accessToken);
-//			request.setAttribute("refresh-token", refreshToken);
-			
-			response.setHeader("access-token", accessToken);
-			response.setHeader("refresh-token", accessToken);
-
-			return true;
-		} else if (refreshToken != null) {
+		if (refreshToken != null) {
 			String userId = jwtService.getUserId(refreshToken);
 			if (userId == null || userId == "")
 				return false;
@@ -67,9 +46,28 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 //			request.setAttribute("access-token", accessToken);
 //			request.setAttribute("refresh-token", refreshToken);
-			
+
 			response.setHeader("access-token", accessToken);
-			response.setHeader("refresh-token", accessToken);
+			response.setHeader("refresh-token", refreshToken);
+
+			return true;
+		} else if (accessToken != null) {
+			String userId = jwtService.getUserId(accessToken);
+			if (userId == null || userId == "")
+				return false;
+
+			logger.info("access 토큰 사용 가능 : {}", refreshToken);
+
+			accessToken = jwtService.createAccessToken("userId", userId);
+			refreshToken = jwtService.createRefreshToken("userId", userId);
+
+			jwtService.saveRefreshToken(userId, refreshToken);
+
+//			request.setAttribute("access-token", accessToken);
+//			request.setAttribute("refresh-token", refreshToken);
+
+			response.setHeader("access-token", accessToken);
+			response.setHeader("refresh-token", refreshToken);
 
 			return true;
 		}

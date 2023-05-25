@@ -29,7 +29,7 @@
 				and boardContent like concat('%', #{word}, '%')
 			</if>
 			<if test="search == 'boardTitle' or search == 'boardId'">
-				and ${search} = #{word}
+				and ${search} like concat('%', #{word}, '%')
 			</if>
 		</if>
 	</sql>

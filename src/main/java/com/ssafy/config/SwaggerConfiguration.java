@@ -61,6 +61,12 @@ public class SwaggerConfiguration {
 		return getDocket("권한", Predicates.or(PathSelectors.regex("/auth.*")));
 
 	}
+	
+	@Bean
+	public Docket planApi() {
+		return getDocket("여행 계획", Predicates.or(PathSelectors.regex("/plan.*")));
+
+	}
 
 	@Bean
 	public Docket allApi() {

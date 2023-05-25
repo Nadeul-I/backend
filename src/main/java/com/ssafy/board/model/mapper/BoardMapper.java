@@ -23,5 +23,5 @@ public interface BoardMapper {
 	
 	boolean modifyBoard(BoardDto boardDto) throws SQLException;
 	
-	boolean deleteBoard(int articleNo) throws SQLException;
+	boolean deleteBoard(int boardNo) throws SQLException;
 }
