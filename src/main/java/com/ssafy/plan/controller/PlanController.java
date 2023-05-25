@@ -103,7 +103,7 @@ public class PlanController {
 	public ResponseEntity<?> planModify(
 			@RequestBody @ApiParam(value = "수정할 여행 계획 정보", required = true) PlanDto planDto) throws Exception {
 		logger.info("planModify - 호출 {}");
-
+		System.out.println(planDto.getPlanEndTitle());
 		if (planService.modifyPlan(planDto)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
