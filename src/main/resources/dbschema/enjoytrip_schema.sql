@@ -98,7 +98,13 @@ DROP TABLE IF EXISTS enjoytrip.plan;
 CREATE TABLE IF NOT EXISTS enjoytrip.plan(
     planNo INT NOT NULL AUTO_INCREMENT,
     planTitle VARCHAR(100) NOT NULL,
+    planStartTitle VARCHAR(100) NOT NULL,
+    planStartLat INT NOT NULL,
+    planStartLng INT NOT NULL,
     planStart INT NOT NULL,
+    planEndTitle VARCHAR(100) NOT NULL,
+    planEndLat INT NOT NULL,
+    planEndLng INT NOT NULL,
     planEnd INT NOT NULL,
     planImg VARCHAR(1000) NOT NULL,
     planId VARCHAR(20) NOT NULL,
@@ -110,10 +116,10 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
--- enjoytrip.board 테이블에 더미 값 집어넣기
-INSERT INTO enjoytrip.plan (planTitle, planImg, planStart, planEnd, planId)
-VALUES ('중요한것은 꺾이지 않는 마음', '', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', '', 1, 2, 'ssafy');
+-- enjoytrip.plan 테이블에 더미 값 집어넣기
+-- INSERT INTO enjoytrip.plan (planTitle, planImg, planStart, planEnd, planId)
+-- VALUES ('중요한것은 꺾이지 않는 마음', '', 1, 2, 'admin'),
+--         ('임포트 이즈 언브레이커블 마인드', '', 1, 2, 'ssafy');
 
 -- enjoytrip.board 테이블의 foreign key 연결 확인
 /*

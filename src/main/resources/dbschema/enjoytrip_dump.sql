@@ -35,31 +35,19 @@ VALUES ('중요한것은 꺾이지 않는 마음', '제곧내', 'admin'),
 -- ---------------------------        
 
 -- enjoytrip.plan 테이블에 더미 값 집어넣기
-INSERT INTO enjoytrip.plan (planTitle, planImg, planStart, planEnd, planId)
-VALUES ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-		('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy'),
-        ('중요한것은 꺾이지 않는 마음', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'admin'),
-        ('임포트 이즈 언브레이커블 마인드', 'http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg', 1, 2, 'ssafy');
+INSERT INTO enjoytrip.plan (planTitle, planStartTitle, planStartLat, planStartLng, planStart, planEndTitle, planEndLat, planEndLng, planEnd, planImg, planId)
+VALUES ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin'),
+        ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin'),
+        ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin'),
+        ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin'),
+        ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin'),
+        ('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/62/219162_image3_1.jpg', 'ssafy'),
+		('TITLE', 'StartTitle', 0, 0, 1, 'EndTitle', 0, 0, 2, 'http://tong.visitkorea.or.kr/cms/resource/48/2533748_image2_1.jpg', 'admin');
 -- ---------------------------        
         
 select * from user;
@@ -67,4 +55,6 @@ select * from user;
 select * from board;
 
 select * from plan;
+
+select * from attraction_info;
 
