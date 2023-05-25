@@ -24,9 +24,9 @@ public class PlanServiceImpl implements PlanService {
 		return planMapper.writePlan(planDto);
 	}
 
-	@Override
-	public List<PlanDto> listPlan(String userId, int pgno) throws Exception {
-		return planMapper.listPlan(userId, pgno);
+	@Override //String userId, int pgno
+	public List<PlanDto> listPlan(PlanDto planDto) throws Exception {
+		return planMapper.listPlan(planDto);
 	}
 
 	@Override

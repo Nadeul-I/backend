@@ -43,15 +43,15 @@ public class PlanController {
 
 	@ApiOperation(value = "여행 계획 목록", notes = "조건에 맞는 게시글들을 불러온다.", response = Map.class)
 	@PostMapping("/list")
-	public ResponseEntity<?> planList(@RequestBody @ApiParam(value = "유저 아이디", required = true) String userId, @RequestBody @ApiParam(value = "현재 페이지", required = true) int pgno)
+	public ResponseEntity<?> planList(@RequestBody @ApiParam(value = "유저 아이디", required = true) PlanDto planDto)
 			throws Exception {
 		logger.info("planList - 호출");
-		logger.info("검색 요건  확인 : {}", pgno);
+		logger.info("검색 요건  확인 : {}", planDto);
 
 		Map<String, Object> map = new HashMap<>();
 
-		PageNavigation pageNavigation = planService.makePageNavigation(userId, pgno);
-		List<PlanDto> list = planService.listPlan(userId, pgno);
+		PageNavigation pageNavigation = planService.makePageNavigation(planDto.getPlanId(), planDto.getPgno());
+		List<PlanDto> list = planService.listPlan(planDto);
 
 		map.put("plans", list);
 		map.put("navigation", pageNavigation);

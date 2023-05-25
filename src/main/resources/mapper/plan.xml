@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.plan.model.mapper.PlanMapper">
+
+	<insert id="writePlan" parameterType="planDto">
+		insert into plan (planTitle, planImg, planStart, planEnd, planId)
+		values
+		(#{planTitle}, #{planImg}, #{planStart}, #{planEnd}, #{planId})
+		<selectKey resultType="int" keyProperty="planNo"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<select id="listPlan" parameterType="planDto" resultType="planDto">
+		select *
+		from plan
+		where planId = #{planId}
+		limit #{start}, #{listSize}
+	</select>
+	
+	<select id="getTotalPlanCount" parameterType="string"
+		resultType="int">
+		select count('planNo')
+		from plan
+		where planId = #{planId}
+	</select>
+	
+	<select id="getPlan" parameterType="int" resultType="planDto">
+		select *
+		from plan
+		where planNo = #{planNo}
+	</select>
+	
+	<update id="modifyPlan" parameterType="planDto">
+		update plan
+		set planTitle = #{planTitle}, planStart = #{planStart}, planEnd = #{planEnd}, planImg = #{planImg}
+		where planNo = #{planNo}
+	</update>
+
+	<delete id="deletePlan" parameterType="int">
+		delete from plan
+		where planNo = #{planNo}
+	</delete>
+
+</mapper>
