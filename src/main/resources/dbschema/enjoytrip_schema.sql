@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS enjoytrip.plan(
     planEndLat INT NOT NULL,
     planEndLng INT NOT NULL,
     planEnd INT NOT NULL,
-    planImg VARCHAR(1000) NOT NULL,
+    planImg VARCHAR(1000),
     planId VARCHAR(20) NOT NULL,
     PRIMARY KEY(planNo),
     FOREIGN KEY(planId) REFERENCES enjoytrip.user(userId) ON DELETE CASCADE
